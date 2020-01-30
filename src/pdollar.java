@@ -27,7 +27,7 @@ public class pdollar {
 				new FileOutputStream("save.txt");
 			} else if (args[0].equalsIgnoreCase("-t")) {// Adding the Template
 				BufferedReader br = new BufferedReader(new FileReader(args[1]));
-				BufferedReader gestureFileReader = null;
+				
 				try {
 					String gestureName = br.readLine();
 					outputWriter.append(gestureName + "\n");
@@ -43,26 +43,9 @@ public class pdollar {
 						}
 					}
 					outputWriter.append("*****\n");
-					gestureFileReader = new BufferedReader(new FileReader("save.txt"));
-					line = " ";
-					ArrayList<Point> gestureList = new ArrayList<Point>();
-					while ((line = gestureFileReader.readLine()) != null) {
-						if (!line.contains(",") && !line.contains("*")) {
-							gestureList = new ArrayList<>();
-							gestureName = line;
-						} else if (line.contains(",")) {
-							String P[] = line.split(",");
-							gestureList.add(new Point(Double.parseDouble(P[0]), Double.parseDouble(P[1]),
-									Integer.parseInt(P[2])));
-						} else {
-							pDollarR.addGesture(gestureName, gestureList);
-						}
-					}
 
-				} finally {
+				} finally {outputWriter.close();
 					br.close();
-					outputWriter.close();
-					gestureFileReader.close();
 				}
 			} else {// Reading the EventGesture File
 				BufferedReader br = new BufferedReader(new FileReader(args[0]));
@@ -89,6 +72,7 @@ public class pdollar {
 							eventList.add(new Point(Double.parseDouble(P[0]), Double.parseDouble(P[1]), Stroke_id));
 						}
 					}
+
 				} finally {
 					br.close();
 				}
