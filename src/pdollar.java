@@ -17,17 +17,19 @@ public class pdollar {
 			{
 				System.out.println("\n****************************     HELP     ****************************");
 				System.out.println("\nPlease enter the correct input");
-				System.out.println("java pdollar –t <gesture file location>: Adds the gesture file to the list of gesture templates");
+				System.out.println(
+						"java pdollar –t <gesture file location>: Adds the gesture file to the list of gesture templates");
 				System.out.println("java pdollar –r: Clears the previous templates");
-				System.out.println("java pdollar <eventstream file location>: Prints the name of gestures from the event stream.\n");
+				System.out.println(
+						"java pdollar <eventstream file location>: Prints the name of gestures from the event stream.\n");
 				System.out.println("**********************************************************************");
 				System.exit(0);
 
-			} else if (args[0].equalsIgnoreCase("-r")) {//Clear the previous templates
+			} else if (args[0].equalsIgnoreCase("-r")) {// Clear the previous templates
 				new FileOutputStream("save.txt");
 			} else if (args[0].equalsIgnoreCase("-t")) {// Adding the Template
 				BufferedReader br = new BufferedReader(new FileReader(args[1]));
-				
+
 				try {
 					String gestureName = br.readLine();
 					outputWriter.append(gestureName + "\n");
@@ -44,7 +46,8 @@ public class pdollar {
 					}
 					outputWriter.append("*****\n");
 
-				} finally {outputWriter.close();
+				} finally {
+					outputWriter.close();
 					br.close();
 				}
 			} else {// Reading the EventGesture File
@@ -61,7 +64,7 @@ public class pdollar {
 
 						} else if (line.equalsIgnoreCase("MOUSEUP")) {
 
-						} else if (line.equalsIgnoreCase("RECOGNIZE")) {//Recognizing the Gesture
+						} else if (line.equalsIgnoreCase("RECOGNIZE")) {// Recognizing the Gesture
 							pDollarR.Recognize(eventList);
 							Stroke_id = 0;
 							line = " ";
